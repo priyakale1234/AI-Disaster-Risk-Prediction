@@ -6,7 +6,7 @@ import PredictionForm from "./components/PredictionForm";
 import PredictionResult from "./components/PredictionResult";
 import EmergencyKit from "./components/EmergencyKit";
 import TranslateCard from "./components/TranslateCard";
-import HistoryTable from "./components/HistoryTable";
+// import HistoryTable from "./components/HistoryTable";
 import AnalyticsChart from "./components/AnalyticsChart";
 import RiskMap from "./components/RiskMap";
 import PDFReport from "./components/PDFReport";
@@ -54,7 +54,7 @@ function App() {
         <TranslateCard />
 
         {/* History */}
-        <HistoryTable />
+        {/* <HistoryTable /> */}
 
         {/* Analytics */}
         <AnalyticsChart />

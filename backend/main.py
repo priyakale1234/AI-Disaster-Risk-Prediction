@@ -9,8 +9,8 @@ from schemas import (
 )
 
 from model_loader import model
-from sqlalchemy import text
-from database import engine
+# from sqlalchemy import text
+# from database import engine
 from schemas import CityInput
 from weather_service import get_weather
 
@@ -70,22 +70,22 @@ def predict(data: FloodInput):
     advice = generate_disaster_advice(risk)
 
     # Save Prediction in MySQL
-    with engine.connect() as conn:
+    # with engine.connect() as conn:
 
-        conn.execute(
-            text("""
-                INSERT INTO predictions
-                (flood_probability, risk_level)
-                VALUES
-                (:probability, :risk)
-            """),
-            {
-                "probability": probability,
-                "risk": risk
-            }
-        )
+    #     conn.execute(
+    #         text("""
+    #             INSERT INTO predictions
+    #             (flood_probability, risk_level)
+    #             VALUES
+    #             (:probability, :risk)
+    #         """),
+    #         {
+    #             "probability": probability,
+    #             "risk": risk
+    #         }
+    #     )
 
-        conn.commit()
+    #     conn.commit()
 
     return {
         "flood_probability": round(probability, 4),
@@ -98,33 +98,33 @@ def predict(data: FloodInput):
 # HISTORY API
 # ===================================================
 
-@app.get("/history")
-def history():
+# @app.get("/history")
+# def history():
 
-    with engine.connect() as conn:
+#     with engine.connect() as conn:
 
-        result = conn.execute(
-            text("""
-                SELECT *
-                FROM predictions
-                ORDER BY id DESC
-            """)
-        )
+#         result = conn.execute(
+#             text("""
+#                 SELECT *
+#                 FROM predictions
+#                 ORDER BY id DESC
+#             """)
+#         )
 
-        rows = result.fetchall()
+#         rows = result.fetchall()
 
-        data = []
+#         data = []
 
-        for row in rows:
+#         for row in rows:
 
-            data.append({
-                "id": row.id,
-                "flood_probability": row.flood_probability,
-                "risk_level": row.risk_level,
-                "created_at": str(row.created_at)
-            })
+#             data.append({
+#                 "id": row.id,
+#                 "flood_probability": row.flood_probability,
+#                 "risk_level": row.risk_level,
+#                 "created_at": str(row.created_at)
+#             })
 
-        return data
+#         return data
 
 
 # ===================================================
